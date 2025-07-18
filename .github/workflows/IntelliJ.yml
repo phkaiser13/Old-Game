@@ -1,1 +1,65 @@
 
+# Nome do Workflow: Aparecerá na aba "Actions" do GitHub
+name: Compilação Manual do Jogo da Velha
+
+# Gatilhos: Quando este workflow deve ser executado
+on:
+  push:
+    branches: [ main, master ] # Altere para o nome da sua branch principal
+  pull_request:
+    branches: [ main, master ] # Altere para o nome da sua branch principal
+
+# Trabalhos (Jobs): As tarefas que o workflow executará
+jobs:
+  build:
+    # Ambiente: Usaremos a versão mais recente do Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o seu código para o ambiente de execução
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # 2. Instala o Java (OpenJDK 24)
+      - name: Configurar JDK 24
+        uses: actions/setup-java@v4
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+
+      # 3. Baixa e descompacta o SDK do Kotlin
+      - name: Configurar compilador Kotlin
+        run: |
+          KOTLIN_VERSION=1.9.23 # Você pode usar a versão mais recente
+          wget https://github.com/JetBrains/kotlin/releases/download/v$KOTLIN_VERSION/kotlin-compiler-$KOTLIN_VERSION.zip
+          unzip kotlin-compiler-$KOTLIN_VERSION.zip
+          echo "$(pwd)/kotlinc/bin" >> $GITHUB_PATH
+
+      # 4. Baixa e descompacta o SDK do JavaFX
+      - name: Configurar JavaFX SDK
+        run: |
+          JFX_VERSION=22.0.1 # Versão compatível com JDK 21+
+          wget https://download2.gluonhq.com/openjfx/22.0.1/openjfx-22.0.1_linux-x64_bin-sdk.zip
+          unzip openjfx-22.0.1_linux-x64_bin-sdk.zip
+          echo "FX_PATH=$(pwd)/javafx-sdk-22.0.1" >> $GITHUB_ENV
+
+      # 5. Cria o diretório de saída para os arquivos compilados
+      - name: Criar diretório de saída
+        run: mkdir -p out/production
+
+      # 6. Compila os fontes Kotlin
+      - name: Compilar código Kotlin
+        run: |
+          kotlinc src/main/kotlin/* -d out/production \
+          -cp "${FX_PATH}/lib/*.jar" \
+          -J--module-path=${FX_PATH}/lib \
+          -J--add-modules=javafx.controls,javafx.fxml
+
+      # 7. Compila os fontes Java, usando os arquivos Kotlin já compilados
+      - name: Compilar código Java
+        run: |
+          javac -d out/production \
+          --module-path "${FX_PATH}/lib" \
+          --add-modules javafx.controls,javafx.fxml \
+          -cp "out/production" \
+          $(find src/main/java -name "*.java")
