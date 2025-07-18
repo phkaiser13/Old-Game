@@ -4,92 +4,97 @@
 
 package com.pedrohenrique.tictactoe.ui.controller
 
+import com.pedrohenrique.tictactoe.ui.theme.ThemeManager
 import javafx.animation.Interpolator
 import javafx.animation.TranslateTransition
 import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
+import javafx.scene.Scene
 import javafx.scene.control.Label
+import javafx.stage.Stage
 import javafx.util.Duration
 
 /**
  * O Controller para a nossa tela de Menu Principal (main_menu.fxml).
- * Esta classe, escrita em Kotlin, contém a lógica que dá vida aos componentes da UI.
- * Ela é responsável por:
- * 1. Manipular os eventos, como cliques nos botões.
- * 2. Acessar e manipular os elementos da UI definidos no FXML (como o título).
- * 3. Executar animações e outras lógicas de apresentação.
  */
 class MainMenuController {
 
-    /**
-     * A anotação @FXML é a cola mágica entre o FXML e este Controller.
-     * Ela instrui o FXMLLoader a injetar (atribuir) o componente com fx:id="titleLabel"
-     * do nosso arquivo FXML para esta propriedade.
-     *
-     * 'lateinit var' é um recurso do Kotlin que nos permite declarar uma propriedade não nula
-     * que será inicializada mais tarde. Isso é perfeito aqui, pois o JavaFX garante que
-     * a propriedade será inicializada antes de a usarmos.
-     */
     @FXML
     private lateinit var titleLabel: Label
 
-    /**
-     * O método initialize() é um método especial que o FXMLLoader chama automaticamente
-     * DEPOIS que todos os campos anotados com @FXML foram injetados.
-     * É o lugar ideal para configurar o estado inicial da nossa tela, como iniciar animações.
-     */
     @FXML
     fun initialize() {
-        // Vamos criar uma animação simples para o título, fazendo-o "flutuar" suavemente.
+        // Animação do título.
         val translateTransition = TranslateTransition(Duration.seconds(2.0), titleLabel)
-        translateTransition.byY = -10.0 // Mover 10 pixels para cima.
-        translateTransition.interpolator = Interpolator.EASE_BOTH // Suaviza o início e o fim da animação.
-        translateTransition.cycleCount = TranslateTransition.INDEFINITE // Repetir indefinidamente.
-        translateTransition.isAutoReverse = true // Faz o movimento de ida e volta.
-        translateTransition.play() // Inicia a animação.
+        translateTransition.byY = -10.0
+        translateTransition.interpolator = Interpolator.EASE_BOTH
+        translateTransition.cycleCount = TranslateTransition.INDEFINITE
+        translateTransition.isAutoReverse = true
+        translateTransition.play()
     }
 
     /**
-     * Este método é chamado quando o botão "Jogar" é clicado.
-     * A ligação é feita no FXML através do atributo onAction="#handlePlayButtonAction".
-     * Por enquanto, apenas imprimiremos no console. No futuro, este método irá navegar
-     * para a tela de configuração da partida.
-     *
-     * @param event O evento de ação gerado pelo clique do botão (não utilizado aqui, mas necessário na assinatura).
+     * Navega para a tela de configuração da partida.
      */
     @FXML
     private fun handlePlayButtonAction(event: ActionEvent) {
-        println("Botão 'Jogar' clicado! Navegando para a tela de setup do jogo...")
-        // Futuramente, aqui teremos o código para carregar a cena 'game_setup.fxml'.
+        try {
+            val stage = titleLabel.scene.window as Stage
+            val loader = FXMLLoader(javaClass.getResource("/fxml/game_setup.fxml"))
+            val root: Parent = loader.load()
+            val newScene = Scene(root)
+
+            // Garante que a próxima cena mantenha o tema atual.
+            ThemeManager.applyCurrentTheme(newScene)
+
+            stage.scene = newScene
+            stage.show()
+        } catch (e: Exception) {
+            println("Erro ao carregar a tela de setup do jogo.")
+            e.printStackTrace()
+        }
     }
 
     /**
-     * Este método é chamado quando o botão "Configurações" é clicado.
-     * A ligação é feita no FXML através do atributo onAction="#handleSettingsButtonAction".
-     * Por enquanto, apenas imprimiremos no console. No futuro, este método irá navegar
-     * para a tela de configurações de tema.
-     *
-     * @param event O evento de ação gerado pelo clique do botão.
+     * Navega para a tela de configurações de tema.
      */
     @FXML
     private fun handleSettingsButtonAction(event: ActionEvent) {
-        println("Botão 'Configurações' clicado! Navegando para a tela de configurações...")
-        // Futuramente, aqui teremos o código para carregar a cena 'settings.fxml'.
+        // ==================================================================
+        // =================== LÓGICA DE NAVEGAÇÃO ATUALIZADA =================
+        // ==================================================================
+        try {
+            // Obtém o Stage (a janela) atual a partir de qualquer componente.
+            val stage = titleLabel.scene.window as Stage
+
+            // Carrega o FXML da tela de configurações.
+            val loader = FXMLLoader(javaClass.getResource("/fxml/settings.fxml"))
+            val root: Parent = loader.load()
+
+            // Cria a nova cena.
+            val newScene = Scene(root)
+
+            // **PASSO CRUCIAL**: Aplica o tema atual à nova cena ANTES de exibi-la.
+            ThemeManager.applyCurrentTheme(newScene)
+
+            // Define a nova cena no palco.
+            stage.scene = newScene
+            stage.show()
+
+        } catch (e: Exception) {
+            println("Erro ao carregar a tela de configurações.")
+            e.printStackTrace()
+        }
     }
 
     /**
-     * Este método é chamado quando o botão "Sair" é clicado.
-     * A ligação é feita no FXML através do atributo onAction="#handleExitButtonAction".
-     * Ele encerra a aplicação de forma limpa.
-     *
-     * @param event O evento de ação gerado pelo clique do botão.
+     * Encerra a aplicação.
      */
     @FXML
     private fun handleExitButtonAction(event: ActionEvent) {
-        println("Botão 'Sair' clicado! Encerrando a aplicação.")
-        // Platform.exit() é a maneira correta e segura de fechar uma aplicação JavaFX.
-        // Ele executa os procedimentos de desligamento necessários.
         Platform.exit()
     }
 }
