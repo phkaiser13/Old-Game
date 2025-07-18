@@ -1,0 +1,106 @@
+/* 2025 */
+/* By Pedro henrique garcia. */
+/* Github/gitlab: Phkaiser13 */
+
+/*
+    Este é o nosso arquivo de tema claro.
+    Ele define as cores para uma aparência mais tradicional e clara,
+    mas mantendo a mesma fonte e estrutura do tema escuro para uma
+    experiência de usuário consistente.
+*/
+
+/*
+    Para o tema claro, usamos um fundo sólido, quase branco.
+    #F5F5F5 (whitesmoke) é mais suave para os olhos do que o branco puro.
+*/
+.root-pane {
+    -fx-background-color: #F5F5F5;
+}
+
+/*
+    O título precisa de uma cor escura para ter contraste com o fundo claro.
+    Um azul escuro e sóbrio (#2C3E50) funciona bem.
+*/
+.title {
+    -fx-text-fill: #2C3E50;
+    -fx-effect: null; /* Removemos a sombra, que não é necessária em um fundo claro. */
+}
+
+/*
+    Botões com fundo cinza claro e borda mais escura para definição.
+    O texto usa a mesma cor do título para consistência.
+*/
+.menu-button, .game-grid-button {
+    -fx-background-color: #E0E0E0;
+    -fx-border-color: #BDBDBD;
+    -fx-text-fill: #2C3E50;
+}
+
+/*
+    O efeito de hover escurece ligeiramente o botão para dar feedback.
+*/
+.menu-button:hover, .game-grid-button:hover {
+    -fx-background-color: #D5D5D5;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #C0C0C0;
+}
+
+/*
+    Rótulos de configuração com a mesma cor escura do título.
+*/
+.config-label {
+    -fx-text-fill: #333333;
+    -fx-effect: null;
+}
+
+/*
+    ChoiceBox segue o mesmo padrão dos botões.
+*/
+.choice-box {
+    -fx-background-color: #E0E0E0;
+    -fx-border-color: #BDBDBD;
+    -fx-border-width: 2px;
+}
+
+.choice-box .label {
+    -fx-text-fill: #2C3E50;
+}
+
+.choice-box .arrow {
+    -fx-background-color: #2C3E50;
+}
+
+.choice-box:hover {
+    -fx-background-color: #D5D5D5;
+}
+
+/*
+    O menu dropdown da ChoiceBox com fundo branco e borda cinza.
+*/
+.choice-box .context-menu {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDBDBD;
+    -fx-border-width: 1px;
+}
+
+.choice-box .menu-item .label {
+    -fx-text-fill: #2C3E50;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #F0F0F0;
+}
+
+/*
+    Cores para os jogadores no tema claro.
+    Usamos cores fortes e clássicas para garantir máxima visibilidade.
+*/
+.player-x {
+    -fx-text-fill: #007BFF; /* Azul forte */
+}
+
+.player-o {
+    -fx-text-fill: #E74C3C; /* Vermelho forte */
+}

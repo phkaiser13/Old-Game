@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 2025 -->
+<!-- By Pedro henrique garcia. -->
+<!-- Github/gitlab: Phkaiser13 -->
+
+<!--
+    Este arquivo FXML define a tela de configuração da partida.
+    O usuário chegará aqui após clicar em "Jogar" no menu principal.
+    A estrutura é similar à do menu, mas usamos HBox para alinhar
+    os rótulos e as caixas de seleção horizontalmente.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+    O VBox raiz, novamente, com a ligação para seu respectivo Controller em Kotlin.
+    Reutilizamos as mesmas folhas de estilo para manter uma aparência consistente
+    em toda a aplicação.
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.pedrohenrique.tictactoe.ui.controller.GameSetupController"
+      alignment="CENTER"
+      spacing="25"
+      styleClass="root-pane"
+      stylesheets="@../css/base.css, @../css/dark_theme.css">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <!-- Um título para a tela, reutilizando a classe de estilo 'title'. -->
+    <Label text="Configurar Partida" styleClass="title"/>
+
+    <!--
+        Usamos um HBox para agrupar um Label e uma ChoiceBox na mesma linha.
+        - alignment="CENTER_LEFT": Alinha os itens à esquerda dentro do HBox.
+        - spacing="10": Espaço entre o Label e a ChoiceBox.
+    -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Modo de Jogo:" styleClass="config-label"/>
+        <!--
+            ChoiceBox é um controle que permite ao usuário escolher de uma lista de opções.
+            fx:id="gameModeChoiceBox" é o identificador que usaremos no Controller para
+            popular as opções (PvP, PvE) e obter a seleção do usuário.
+        -->
+        <ChoiceBox fx:id="gameModeChoiceBox" styleClass="choice-box"/>
+    </HBox>
+
+    <!--
+        Esta HBox contém a configuração de dificuldade.
+        No nosso Controller, faremos com que esta linha inteira fique visível ou invisível
+        dependendo da seleção no 'gameModeChoiceBox'.
+        fx:id="difficultyBox" - Damos um ID ao HBox pai para podermos controlar sua visibilidade.
+    -->
+    <HBox fx:id="difficultyBox" alignment="CENTER_LEFT" spacing="10">
+        <Label text="Dificuldade:" styleClass="config-label"/>
+        <ChoiceBox fx:id="difficultyChoiceBox" styleClass="choice-box"/>
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Primeiro a Jogar:" styleClass="config-label"/>
+        <ChoiceBox fx:id="firstPlayerChoiceBox" styleClass="choice-box"/>
+    </HBox>
+
+    <!--
+        Um HBox para os botões de ação na parte inferior da tela.
+        - alignment="CENTER": Centraliza os botões dentro do HBox.
+        - spacing="20": Espaço entre os botões "Iniciar Jogo" e "Voltar".
+    -->
+    <HBox alignment="CENTER" spacing="20">
+        <!--
+            onAction aponta para os métodos correspondentes no GameSetupController.
+            Reutilizamos a classe 'menu-button' para manter a consistência visual.
+        -->
+        <Button text="Iniciar Jogo" onAction="#handleStartGameAction" styleClass="menu-button"/>
+        <Button text="Voltar" onAction="#handleBackButtonAction" styleClass="menu-button"/>
+    </HBox>
+
+</VBox>

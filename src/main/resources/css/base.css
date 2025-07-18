@@ -1,0 +1,86 @@
+/* 2025 */
+/* By Pedro henrique garcia. */
+/* Github/gitlab: Phkaiser13 */
+
+/* ... (estilos anteriores de .root-pane, .title, .menu-button, .config-label, .choice-box) ... */
+/* O código anterior permanece o mesmo. Apenas adicionamos as novas regras no final. */
+
+.root-pane {
+    -fx-font-family: "Press Start 2P";
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.title {
+    -fx-font-size: 36px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 2, 2);
+}
+
+.menu-button {
+    -fx-font-size: 22px;
+    -fx-padding: 12px 24px;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 3px;
+}
+
+.menu-button:hover {
+    -fx-cursor: hand;
+}
+
+.menu-button:pressed {
+    -fx-translate-y: 2px;
+}
+
+.config-label {
+    -fx-font-size: 16px;
+}
+
+.choice-box {
+    -fx-background-radius: 0;
+    -fx-font-size: 14px;
+    -fx-pref-width: 300px;
+}
+
+.choice-box .arrow {
+    -fx-padding: 8px;
+}
+
+.choice-box .context-menu {
+    -fx-background-radius: 0;
+}
+
+.choice-box .menu-item {
+    -fx-font-family: "Press Start 2P";
+}
+
+.choice-box .menu-item:hover {
+    -fx-cursor: hand;
+}
+
+/* ================================================================== */
+/* =================== ESTILOS DO TABULEIRO DE JOGO ================= */
+/* ================================================================== */
+
+/*
+    Estilo para os botões que formam as células do tabuleiro de jogo.
+    Aplicado aos botões com styleClass="game-grid-button".
+*/
+.game-grid-button {
+    /* Define um tamanho de fonte bem grande para os marcadores 'X' e 'O'. */
+    -fx-font-size: 64px;
+
+    /* Remove qualquer raio de borda ou fundo para manter os cantos retos. */
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+
+    /* Remove o preenchimento para que o texto 'X'/'O' possa ocupar todo o espaço. */
+    -fx-padding: 0;
+}
+
+/*
+    Fornece feedback visual quando o mouse passa sobre uma célula do tabuleiro.
+*/
+.game-grid-button:hover {
+    -fx-cursor: hand; /* Indica que a célula é clicável. */
+}

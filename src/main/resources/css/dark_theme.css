@@ -1,0 +1,103 @@
+/* 2025 */
+/* By Pedro henrique garcia. */
+/* Github/gitlab: Phkaiser13 */
+
+/* ... (estilos anteriores de .root-pane, .title, .menu-button, .config-label, .choice-box) ... */
+/* O código anterior permanece o mesmo. Apenas adicionamos as novas regras no final. */
+
+.root-pane {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #87CEEB, #4682B4);
+}
+
+.title {
+    -fx-text-fill: #FFC300;
+}
+
+.menu-button {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+.menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-button:pressed {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+}
+
+.config-label {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 3, 0, 1, 1);
+}
+
+.choice-box {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+.choice-box .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .arrow {
+    -fx-background-color: white;
+}
+
+.choice-box:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+.choice-box .context-menu {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+.choice-box .menu-item .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ================================================================== */
+/* =================== ESTILOS DO TABULEIRO DE JOGO ================= */
+/* ================================================================== */
+
+/*
+    Estiliza os botões da grade para o tema escuro.
+*/
+.game-grid-button {
+    /* Fundo semi-transparente, consistente com os outros controles. */
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+    /* Borda branca para criar o efeito da grade. */
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+/*
+    Efeito de "iluminação" ao passar o mouse sobre uma célula.
+*/
+.game-grid-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*
+    Estilo para o marcador do Jogador X.
+    Aplicado aos botões com a classe 'player-x'.
+*/
+.player-x {
+    -fx-text-fill: #33D4FF; /* Um azul ciano vibrante. */
+}
+
+/*
+    Estilo para o marcador do Jogador O.
+    Aplicado aos botões com a classe 'player-o'.
+*/
+.player-o {
+    -fx-text-fill: #FFC300; /* O mesmo dourado do título, para consistência. */
+}

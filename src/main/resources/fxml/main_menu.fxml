@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 2025 -->
+<!-- By Pedro henrique garcia. -->
+<!-- Github/gitlab: Phkaiser13 -->
+
+<!--
+    Este é um arquivo FXML (FX Markup Language). Ele descreve a estrutura da nossa interface de usuário.
+    Pense nele como o HTML para a nossa aplicação desktop.
+    Aqui, definimos quais componentes (botões, textos, etc.) existem e como eles estão organizados.
+    A lógica por trás desses componentes (o que acontece quando um botão é clicado) será definida
+    no nosso arquivo de Controller em Kotlin.
+-->
+
+<!-- Importamos as classes JavaFX que vamos usar no nosso layout. -->
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    O elemento raiz do nosso layout.
+    fx:controller="com.pedrohenrique.tictactoe.ui.controller.MainMenuController"
+    Esta é a ligação crucial entre a nossa View (este FXML) e o nosso Controller (o código Kotlin).
+    Ele diz ao JavaFX: "A lógica para esta tela está na classe MainMenuController".
+
+    VBox é um painel que organiza seus filhos (os componentes dentro dele) em uma única coluna vertical.
+    É perfeito para um menu simples.
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.pedrohenrique.tictactoe.ui.controller.MainMenuController"
+      alignment="CENTER"
+      spacing="20"
+      styleClass="root-pane"
+      stylesheets="@../css/base.css, @../css/dark_theme.css">
+    <!--
+        - alignment="CENTER": Centraliza todos os componentes dentro do VBox.
+        - spacing="20": Adiciona um espaço vertical de 20 pixels entre cada componente.
+        - styleClass="root-pane": Um seletor de CSS que podemos usar para estilizar este painel (ex: imagem de fundo).
+        - stylesheets="@...": Link para nossas folhas de estilo. Carregamos uma base e um tema específico.
+          O '@' indica que o caminho é relativo a este arquivo FXML.
+    -->
+
+    <padding>
+        <!-- Adiciona um preenchimento interno de 25 pixels em todos os lados do VBox. -->
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <!--
+        Um Label para o título do jogo.
+        fx:id="titleLabel" - Este é um identificador único. No nosso Controller, poderemos acessar
+        este Label usando uma variável chamada 'titleLabel' para, por exemplo, animá-lo.
+        styleClass="title" - Um seletor de CSS para aplicar um estilo de título.
+    -->
+    <Label fx:id="titleLabel" text="Goblin Slayer" styleClass="title"/>
+
+    <!--
+        O botão para iniciar o jogo.
+        onAction="#handlePlayButtonAction" - Define que, quando este botão for clicado, o método
+        'handlePlayButtonAction' no nosso MainMenuController será executado.
+        styleClass="menu-button" - Um seletor de CSS para dar a todos os botões de menu a mesma aparência.
+    -->
+    <Button text="Jogar" onAction="#handlePlayButtonAction" styleClass="menu-button"/>
+
+    <!-- O botão para abrir a tela de configurações. -->
+    <Button text="Configurações" onAction="#handleSettingsButtonAction" styleClass="menu-button"/>
+
+    <!-- O botão para fechar a aplicação. -->
+    <Button text="Sair" onAction="#handleExitButtonAction" styleClass="menu-button"/>
+
+</VBox>
