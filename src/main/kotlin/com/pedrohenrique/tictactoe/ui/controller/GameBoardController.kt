@@ -4,7 +4,7 @@
 
 package com.pedrohenrique.tictactoe.ui.controller
 
-import com.pedrohenrique.tictactoe
+import com.pedrohenrique.tictactoe.game.
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
